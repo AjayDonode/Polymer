@@ -75,9 +75,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <app-drawer>
         <app-toolbar>Menu</app-toolbar>
         <iron-selector selected="[[page]]" attr-for-selected="name" class="drawer-list" role="navigation">
-          <a name="view1" href="/view1">View One</a>
-          <a name="view2" href="/view2">View Two</a>
-          <a name="view3" href="/view3">View Three</a>
+          <a name="clock-view" href="/clock-view">Clock</a>
+          <a name="calendar-view" href="/calendar-view">Calendar</a>
+          <a name="todo-view" href="/todo-view">Todo</a>
+          <a name="frame-view" href="/frame-view">Frame</a>
         </iron-selector>
       </app-drawer>
 
@@ -96,9 +97,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             attr-for-selected="name"
             fallback-selection="view404"
             role="main">
-          <my-view1 name="view1"></my-view1>
-          <my-view2 name="view2"></my-view2>
-          <my-view3 name="view3"></my-view3>
+          <my-clock-view name="clock-view"></my-clock-view>
+          <my-calendar-view name="calendar-view"></my-calendar-view>
+          <my-todo-view name="todo-view"></my-todo-view>
+          <my-frame-view name="frame-view"></my-frame-view>
           <my-view404 name="view404"></my-view404>
         </iron-pages>
       </app-header-layout>
