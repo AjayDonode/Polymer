@@ -3,8 +3,8 @@
   npm install -g polymer-cli
 
 ###2. Create Project Folder
-  -mkdir my-appxx
-  -cd my-appxx
+  -mkdir my-appxx  
+  -cd my-appxx  
 ###3. Initialize your application with application template
   polymer init starter-kit
 
