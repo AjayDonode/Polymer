@@ -12,28 +12,106 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-todo-view">
-  <template>
+    <template>
     <style include="shared-styles">
       :host {
         display: block;
 
         padding: 10px;
       }
+      .flex {
+          @apply(--layout-horizontal);
+        }
+
+      paper-header-panel {
+        --paper-header-panel-shadow: {
+            height: 6px;
+            bottom: -6px;
+            box-shadow: inset 0px 5px 6px -3px rgba(0, 0, 0, 0.4);
+        };
+      }
     </style>
 
     <div class="card">
-      <div class="circle">3</div>
-      <h1>Todo</h1>
-      <paper-input  floatingLabel label="First Name"></paper-input>
-      <paper-input  floatingLabel label="Last Name"></paper-input>
-      <paper-input  floatingLabel label="Address"></paper-input>
-      <paper-button>Add</paper-button>
-    </div>
-  </template>
+      <div class="container flex">
+        <div class="circle">3</div>
+        <h1> Todo</h1>
+      </div>
+      <paper-input id="newTask"  floatingLabel label="Add new task"></paper-input>
+      <paper-button on-click="addTask">Add</paper-button>
+      <!--paper-fab  icon="icons:add" ></paper-fab -->
 
-  <script>
-    Polymer({
-      is: 'my-todo-view'
-    });
-  </script>
+
+       <!--paper-header-panel mode="standard">
+         <paper-toolbar>Pending Todo Items</paper-toolbar>
+         <div>Content goes here...</div>
+        <template is="dom-repeat" items="{{todos}}">
+          <div>Todo: <span>{{item.label}}</span> <span>{{item.iscomplete}}</span> </div>
+        </template -->
+    <template is="dom-repeat" items="{{todos}}">
+      <paper-material class="todo" elevation="1">
+        <paper-checkbox checked="{{completed}}"></paper-checkbox>
+        <paper-fab hidden$={{editing}}  icon="icons:create" on-tap="doEdit" mini></paper-fab>
+        <paper-fab hidden$={{!editing}} icon="icons:done"   on-tap="doEdit" mini></paper-fab>
+        <paper-item hidden="{{editing}}" id="task">{{item.task}}</paper-item>
+        <paper-item  hidden="{{editing}}" id="desc" > {{item.description}} </paper-item>
+        <paper-input id="edit" hidden="{{!editing}}" value="{{item.task}}"></paper-input>
+        <paper-input id="descedit" hidden="{{!editing}}" value="{{item.description}}"></paper-input>
+        <paper-item>Created by: <span>{{item.user}}</span></paper-item>
+        <paper-item>{{time}}</paper-item>
+      </paper-material> <!-- data bindings in local DOM -->
+    </template>
+    <!--/paper-header-panel -->
+    </div>
+    </template>
+
+    <script>
+        Polymer({
+            is: 'my-todo-view',
+            properties: {
+              editing: {
+                 type: Boolean,
+                 value: false
+             },
+             todos:{
+               type: Array
+             }
+            },
+            ready: function() {
+                this.todos = [{
+                    task: 'Bob',
+                    description: 'lorem amet site description',
+                    cretedby: "",
+                    completed: false,
+                    editing:true,
+                    time:"10/10/2016",
+                    user: 'Smith'
+                }, {
+                    task: 'Sally',
+                    description: 'lorem amet site description',
+                    cretedby: "",
+                    completed: false,
+                    editing:false,
+                    time:"10/10/2016",
+                    user: 'Johnson'
+                }];
+            },
+            addTask: function(){
+              var _newTask = {
+                  task: this.$.newTask.value,
+                  cretedby: "adonode",
+                  completed: false,
+                  editing:false,
+                  time: new Date(),
+                  user: 'adonode'
+              }
+              console.log("This is console log"+_newTask.task);
+              this.push('todos', _newTask);
+              this.$.newTask.value = "";
+            },
+            doEdit: function(e){
+                this.editing=!this.editing;
+            }
+        });
+    </script>
 </dom-module>
