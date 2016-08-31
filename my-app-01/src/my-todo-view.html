@@ -32,7 +32,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     </style>
 
-    <div class="card">
+    <div >
       <div class="container flex">
         <div class="circle">3</div>
         <h1> Todo</h1>
@@ -41,41 +41,50 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <paper-button on-click="addTask">Add</paper-button>
       <!--paper-fab  icon="icons:add" ></paper-fab -->
 
-
-       <!--paper-header-panel mode="standard">
-         <paper-toolbar>Pending Todo Items</paper-toolbar>
-         <div>Content goes here...</div>
-        <template is="dom-repeat" items="{{todos}}">
+        <!--template is="dom-repeat" items="{{todos}}">
           <div>Todo: <span>{{item.label}}</span> <span>{{item.iscomplete}}</span> </div>
         </template -->
     <template is="dom-repeat" items="{{todos}}">
+    <div class="card">
       <paper-material class="todo" elevation="1">
-        <paper-checkbox checked="{{completed}}"></paper-checkbox>
-        <paper-fab hidden$={{editing}}  icon="icons:create" on-tap="doEdit" mini></paper-fab>
-        <paper-fab hidden$={{!editing}} icon="icons:done"   on-tap="doEdit" mini></paper-fab>
-        <paper-item hidden="{{editing}}" id="task">{{item.task}}</paper-item>
-        <paper-item  hidden="{{editing}}" id="desc" > {{item.description}} </paper-item>
-        <paper-input id="edit" hidden="{{!editing}}" value="{{item.task}}"></paper-input>
+        <paper-checkbox checked="{{item.completed}}"></paper-checkbox>
+        <!--paper-fab hidden$={{editing}}  icon="icons:create" on-tap="doEdit" mini></paper-fab>
+        <paper-fab hidden$={{!editing}} icon="icons:done"   on-tap="doEdit" mini></paper-fab -->
+        <paper-item hidden="{{editing}}" on-click="handleClick" id="task">{{item.task}}</paper-item>
+        <paper-item  hidden="{{editing}}" on-click="doEdit" id="desc" > {{item.description}} </paper-item>
+        <paper-input id="edit" hidden="{{!editing}}" on-click="handleClick" value="{{item.task}}"></paper-input>
         <paper-input id="descedit" hidden="{{!editing}}" value="{{item.description}}"></paper-input>
         <paper-item>Created by: <span>{{item.user}}</span></paper-item>
         <paper-item>{{time}}</paper-item>
       </paper-material> <!-- data bindings in local DOM -->
-    </template>
-    <!--/paper-header-panel -->
     </div>
+    </template>
+    </div>
+
+    <paper-dialog id="actions">
+        <h2>Description : {{}}</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute
+            irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+        <div class="buttons">
+            <paper-button>More Info...</paper-button>
+            <paper-button dialog-dismiss>Decline</paper-button>
+            <paper-button dialog-confirm autofocus>Accept</paper-button>
+        </div>
+    </paper-dialog>
+    
     </template>
 
     <script>
         Polymer({
             is: 'my-todo-view',
             properties: {
-              editing: {
-                 type: Boolean,
-                 value: false
-             },
-             todos:{
-               type: Array
-             }
+                editing: {
+                    type: Boolean,
+                    value: false
+                },
+                todos: {
+                    type: Array
+                }
             },
             ready: function() {
                 this.todos = [{
@@ -83,34 +92,38 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                     description: 'lorem amet site description',
                     cretedby: "",
                     completed: false,
-                    editing:true,
-                    time:"10/10/2016",
+                    editing: true,
+                    time: "10/10/2016",
                     user: 'Smith'
                 }, {
                     task: 'Sally',
                     description: 'lorem amet site description',
                     cretedby: "",
-                    completed: false,
-                    editing:false,
-                    time:"10/10/2016",
+                    completed: true,
+                    editing: false,
+                    time: "10/10/2016",
                     user: 'Johnson'
                 }];
             },
-            addTask: function(){
-              var _newTask = {
-                  task: this.$.newTask.value,
-                  cretedby: "adonode",
-                  completed: false,
-                  editing:false,
-                  time: new Date(),
-                  user: 'adonode'
-              }
-              console.log("This is console log"+_newTask.task);
-              this.push('todos', _newTask);
-              this.$.newTask.value = "";
+            addTask: function() {
+                var _newTask = {
+                        task: this.$.newTask.value,
+                        cretedby: "adonode",
+                        completed: false,
+                        editing: false,
+                        time: new Date(),
+                        user: 'adonode'
+                    }
+                    //console.log("This is console log"+_newTask.task);
+                this.push('todos', _newTask);
+                this.$.newTask.value = "";
             },
-            doEdit: function(e){
-                this.editing=!this.editing;
+            doEdit: function(e) {
+              console.log("On click"+ e);
+                this.editing = !this.editing;
+            },
+            handleClick: function(){
+              console.log("Test here ");
             }
         });
     </script>

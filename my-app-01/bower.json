@@ -21,8 +21,9 @@
     "paper-header-panel": "PolymerElements/paper-header-panel",
     "paper-toolbar": "PolymerElements/paper-toolbar",
     "paper-fab": "PolymerElements/paper-fab#~1.2.0",
-    "paper-item": "PolymerElements/paper-item#~1.2.0"
-
+    "paper-item": "PolymerElements/paper-item#~1.2.0",
+    "paper-checkbox": "PolymerElements/paper-checkbox#~1.4.0",
+    "paper-dialog": "PolymerElements/paper-dialog#~1.1.0"
   },
   "devDependencies": {
     "web-component-tester": "^4.0.0"
