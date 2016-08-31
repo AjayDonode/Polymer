@@ -10,15 +10,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <link rel="import" href="shared-styles.html">
-<link rel="import" href="components/clock-element.html">
-
-
+<link rel="import" href="components/watch-element.html">
 <dom-module id="my-clock-view">
   <template>
     <style include="shared-styles">
       :host {
         display: block;
-
         padding: 10px;
       }
 
@@ -32,7 +29,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h1>Time Machine</h1>
       <hr>
       <div>
-        <clock-element></clock-element>
+        <watch-element id="PST"></watch-element>
       </div>
 
     </div>
