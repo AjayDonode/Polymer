@@ -12,7 +12,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="shared-styles.html">
 
 <dom-module id="my-calendar-view">
-  <template>
+    <template>
     <style include="shared-styles">
       :host {
         display: block;
@@ -24,13 +24,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <div class="card">
       <div class="circle"> 2 <iron-icon icon="assignment"></iron-icon> </div>
       <h1>Calendar</h1>
-      <google-calendar-list title="What I'm up to"></google-calendar-list>
+      <iframe src="https://calendar.google.com/calendar/embed?src=ajaydonode%40gmail.com&ctz=America/Los_Angeles"
+      style="border: 0" width="100%" height="1000" frameborder="0" scrolling="no"></iframe>
     </div>
   </template>
 
-  <script>
-    Polymer({
-      is: 'my-calendar-view'
-    });
-  </script>
+    <script>
+        Polymer({
+            is: 'my-calendar-view'
+        });
+    </script>
 </dom-module>
